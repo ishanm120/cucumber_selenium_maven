@@ -1,4 +1,4 @@
-# Cucumber7.x Selenium 4.15 TestNGLatestPOC
+# Cucumber7.x Selenium 4.15 TestNG
 
 This repository contains unning Cucumber tests using TestNG with Cucumber 7.x. The project demonstrates how to set up and configure your test framework to execute Cucumber scenarios in parallel with TestNG.
 
