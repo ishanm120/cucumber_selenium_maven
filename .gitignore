@@ -3,6 +3,7 @@ screenshots/
 screenshot/
 test-output/
 build/
+/ExtentReports
 
 application.log
 ##############################
