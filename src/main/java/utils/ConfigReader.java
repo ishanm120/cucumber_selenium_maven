@@ -12,7 +12,7 @@ public class ConfigReader {
     private static ConfigReader configReader;
 
     private static Properties properties = new Properties();
-    private static final String propertyFilePath= "C:\\Users\\HP\\Downloads\\Cucumber7.xTestNGLatestPOC-master\\Cucumber7.xTestNGLatestPOC-master\\src\\test\\resources\\configs\\global.properties";
+    private static final String propertyFilePath= "src/test/resources/configs/global.properties";
 
 
     public static synchronized ConfigReader getConfigReader(){

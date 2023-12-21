@@ -1,6 +1,7 @@
 package utils;
 
-import DriverManager.DriverFactory;
+import DriverPackage.DriverFactory;
+import DriverPackage.DriverManager;
 import org.openqa.selenium.support.PageFactory;
 import pages.CommunityPage;
 import pages.HomePage;
@@ -9,7 +10,7 @@ import pages.NavigationPage;
 
 public class PageObjectManager {
     public PageObjectManager() {
-        PageFactory.initElements(DriverFactory.getDriver(), this);
+        PageFactory.initElements(DriverManager.getWebDriverManager().getWebDriver(), this);
     }
 
     private HomePage homePage;

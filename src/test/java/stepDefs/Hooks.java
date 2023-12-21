@@ -1,20 +1,35 @@
 package stepDefs;
-import org.openqa.selenium.OutputType;
-import DriverManager.DriverFactory;
+import DriverPackage.DriverFactory;
+import DriverPackage.DriverManager;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.testng.annotations.AfterMethod;
 
 public class Hooks {
 
     @Before
     public void setup(){
-        DriverFactory.getDriverInstance();
+        DriverManager.getWebDriverManager().startWebDriver();
     }
 
     @After
     public void tearDown(Scenario scenario){
-        DriverFactory.tearDown(scenario);
+        afterStep(scenario);
+        DriverManager.getWebDriverManager().stopWebDriver(true);
     }
+
+        private void afterStep(Scenario scenario) {
+            if (scenario.isFailed()) {
+                try {
+                    byte[] src = ((TakesScreenshot) DriverManager.getWebDriverManager().getWebDriver()).getScreenshotAs(OutputType.BYTES);
+                    scenario.attach(src, "image/png", null);
+                } catch (Exception e) {
+                }
+            }
+        }
+
 }

@@ -1,21 +1,20 @@
 package pages;
 
-import DriverManager.DriverFactory;
+import DriverPackage.DriverFactory;
+import DriverPackage.DriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.ConfigReader;
 
 
 public class HomePage {
     private static final Logger logger = LogManager.getLogger(HomePage.class);
     // Constructor
     public HomePage() {
-        PageFactory.initElements(DriverFactory.getDriver(), this);
+        PageFactory.initElements(DriverManager.getWebDriverManager().getWebDriver(), this);
     }
 
     @FindBy(xpath = "//*[@id='example-applications']")
@@ -34,7 +33,7 @@ public class HomePage {
     }
 
     public void chooseHeaderOption(String inputValue){
-        DriverFactory.getDriver().findElement(By.xpath(String.format(HEADER_OPTION,inputValue))).click();
+        DriverManager.getWebDriverManager().getWebDriver().findElement(By.xpath(String.format(HEADER_OPTION,inputValue))).click();
     }
 
 }

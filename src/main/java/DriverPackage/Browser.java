@@ -1,4 +1,4 @@
-package DriverManager;
+package DriverPackage;
 
 public enum Browser {
 

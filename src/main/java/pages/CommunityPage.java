@@ -1,6 +1,7 @@
 package pages;
 
-import DriverManager.DriverFactory;
+import DriverPackage.DriverFactory;
+import DriverPackage.DriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -10,7 +11,7 @@ public class CommunityPage {
 
     // Constructor
     public CommunityPage() {
-        PageFactory.initElements(DriverFactory.getDriver(), this);
+        PageFactory.initElements(DriverManager.getWebDriverManager().getWebDriver(), this);
     }
 
     @FindBy(xpath = "//*[@class='center-layout']//button[contains(text(),'Community')]")
