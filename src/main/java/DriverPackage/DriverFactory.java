@@ -1,13 +1,10 @@
 package DriverPackage;
-import io.cucumber.java.Scenario;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import pages.HomePage;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import utils.ConfigReader;
 
 import java.time.Duration;
@@ -68,49 +65,6 @@ public class DriverFactory {
         driverThreadLocal.set(null);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//    public static WebDriver getDriver() {
-//        return driver;
-//    }
-//
-//    public static void setUpDriver() {
-//
-//        if (driverFactory==null) {
-//            driverFactory = new DriverFactory();
-//        }
-//    }
-//
-//    public static void tearDown(Scenario scenario) {
-//
-//        if(scenario.isFailed()) {
-//            final byte[] screenshot = ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
-//            scenario.attach(screenshot, "image.png", scenario.getName());
-//        }
-//        if(driver!=null) {
-//            driver.close();
-//            driver.quit();
-//        }
-//        driverFactory = null;
-//    }
-//
     public WebDriver getDriverInstance(){
         String browser = ConfigReader.getConfigReader().getProperty("browser");
         logger.info("browser name is : ");
@@ -122,14 +76,21 @@ public class DriverFactory {
         switch (browser){
             case "chrome":
                 return getChromeDriverInstance();
+            case "firefox":
+                return getFireFoxDriverInstance();
         }
         return null;
     }
 
     private WebDriver getChromeDriverInstance(){
         ChromeOptions options = new ChromeOptions();
-        options.setBrowserVersion("117");
+        options.setBrowserVersion(ConfigReader.getConfigReader().getProperty("browserVersion"));
         WebDriver driver = new ChromeDriver();
+        return driver;
+    }
+
+    private WebDriver getFireFoxDriverInstance(){
+        WebDriver driver = new FirefoxDriver();
         return driver;
     }
 

@@ -1,7 +1,6 @@
 package stepDefs;
 
 import io.cucumber.java.en.When;
-import pages.HomePage;
 import pages.NavigationPage;
 import utils.PageObjectManager;
 
