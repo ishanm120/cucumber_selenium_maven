@@ -1,11 +1,11 @@
-package stepDefs;
+package stepDefs.uiSteps;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
-import pages.CommunityPage;
+import ui_framework.pages.CommunityPage;
 import utils.PageObjectManager;
 
 public class CommunityPageSteps {

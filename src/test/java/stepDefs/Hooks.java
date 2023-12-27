@@ -1,6 +1,6 @@
 package stepDefs;
 
-import DriverPackage.DriverManager;
+import ui_framework.DriverPackage.DriverManager;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -17,10 +17,12 @@ public class Hooks {
    }
 
     @Before
-    public void setup(){
-
-        getLogger().info("Test Case Start");
-        DriverManager.getWebDriverManager().startWebDriver();
+    public void setup(Scenario scenario){
+        getLogger().error("API test started "+ scenario.getName());
+        if(scenario.getSourceTagNames().contains("@ui")){
+            getLogger().info("starting webdriver instance");
+            DriverManager.getWebDriverManager().startWebDriver();
+        }
     }
 
     @After

@@ -1,9 +1,9 @@
-package stepDefs;
+package stepDefs.uiSteps;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pages.HomePage;
+import ui_framework.pages.HomePage;
 
 public class HomePageSteps {
 

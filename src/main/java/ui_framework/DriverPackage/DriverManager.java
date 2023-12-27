@@ -1,4 +1,4 @@
-package DriverPackage;
+package ui_framework.DriverPackage;
 
 public abstract class DriverManager {
     private static DriverFactory webDriverManager;
@@ -13,7 +13,7 @@ public abstract class DriverManager {
                 return webDriverManager;
             }
             try {
-                DriverFactory newObject = (DriverFactory) Class.forName("DriverPackage.DriverFactory").newInstance();
+                DriverFactory newObject = (DriverFactory) Class.forName("ui_framework.DriverPackage.DriverFactory").newInstance();
                 webDriverManager = newObject;
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();

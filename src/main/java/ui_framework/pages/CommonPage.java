@@ -1,6 +1,6 @@
-package pages;
+package ui_framework.pages;
 
-import DriverPackage.DriverManager;
+import ui_framework.DriverPackage.DriverManager;
 import org.openqa.selenium.support.PageFactory;
 
 public class CommonPage {

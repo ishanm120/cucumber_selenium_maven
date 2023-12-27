@@ -1,7 +1,7 @@
-package stepDefs;
+package stepDefs.uiSteps;
 
 import io.cucumber.java.en.When;
-import pages.NavigationPage;
+import ui_framework.pages.NavigationPage;
 import utils.PageObjectManager;
 
 public class NavigationSteps {
