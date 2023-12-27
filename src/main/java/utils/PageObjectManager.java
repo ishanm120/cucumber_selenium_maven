@@ -1,12 +1,11 @@
 package utils;
 
-import DriverPackage.DriverFactory;
-import DriverPackage.DriverManager;
+import ui_framework.DriverPackage.DriverManager;
 import org.openqa.selenium.support.PageFactory;
-import pages.CommunityPage;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.NavigationPage;
+import ui_framework.pages.CommunityPage;
+import ui_framework.pages.HomePage;
+import ui_framework.pages.LoginPage;
+import ui_framework.pages.NavigationPage;
 
 public class PageObjectManager {
     public PageObjectManager() {

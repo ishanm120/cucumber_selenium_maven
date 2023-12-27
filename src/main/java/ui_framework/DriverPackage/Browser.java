@@ -1,4 +1,4 @@
-package DriverPackage;
+package ui_framework.DriverPackage;
 
 public enum Browser {
 
