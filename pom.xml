@@ -19,7 +19,7 @@
     <org.testng.version>7.7.1</org.testng.version>
     <io.cucumber.version>7.11.1</io.cucumber.version>
     <selenium.version>4.15.0</selenium.version>
-    <lombok.version>1.18.26</lombok.version>
+    <lombok.version>1.18.30</lombok.version>
     <grasshooper.version>1.10.1</grasshooper.version>
     <extentReport.version>5.0.9</extentReport.version>
     <picocontainer.version>1.2.5</picocontainer.version>
