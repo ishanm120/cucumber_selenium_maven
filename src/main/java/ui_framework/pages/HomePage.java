@@ -32,7 +32,7 @@ public class HomePage {
     }
 
     public void chooseHeaderOption(String inputValue){
-        logger.info("adding webhook test");
+        logger.info("adding webhook test connection");
         DriverManager.getWebDriverManager().getWebDriver().findElement(By.xpath(String.format(HEADER_OPTION,inputValue))).click();
     }
 
