@@ -5,9 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import utils.ConfigReader;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DriverFactory {
     public final static int TIMEOUT = 10;
@@ -65,24 +70,26 @@ public class DriverFactory {
         driverThreadLocal.set(null);
     }
 
-    public WebDriver getDriverInstance(){
+    public WebDriver getDriverInstance() throws MalformedURLException {
         String browser = ConfigReader.getConfigReader().getProperty("browser");
         logger.info("browser name is : ");
         System.out.println("browser name is : "+ browser);
         return getDriverInstance(browser);
     }
 
-    public WebDriver getDriverInstance(String browser){
+    public WebDriver getDriverInstance(String browser) throws MalformedURLException {
         switch (browser){
             case "chrome":
                 return getChromeDriverInstance();
             case "firefox":
                 return getFireFoxDriverInstance();
+            case "remote":
+                return getRemoteDriverInstance();
         }
         return null;
     }
 
-    private WebDriver getChromeDriverInstance(){
+    private WebDriver getChromeDriverInstance() {
         ChromeOptions options = new ChromeOptions();
         options.setBrowserVersion(ConfigReader.getConfigReader().getProperty("browserVersion"));
         WebDriver driver = new ChromeDriver();
@@ -91,6 +98,17 @@ public class DriverFactory {
 
     private WebDriver getFireFoxDriverInstance(){
         WebDriver driver = new FirefoxDriver();
+        return driver;
+    }
+
+    private WebDriver getRemoteDriverInstance() throws MalformedURLException {
+        ChromeOptions options = new ChromeOptions();
+        options.setBrowserVersion(ConfigReader.getConfigReader().getProperty("browserVersion"));
+        Map<String, Object> cloudOptions = new HashMap<>();
+        cloudOptions.put("enableVNC", true);
+        cloudOptions.put("enableVideo", true);
+        options.setCapability("cloud:options", cloudOptions);
+        WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),options);
         return driver;
     }
 
