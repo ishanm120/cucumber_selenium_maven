@@ -11,7 +11,7 @@ import utils.ConfigReader;
 @CucumberOptions(features = "src/test/resources/features",
         glue = {"stepDefs"},
         plugin = {"pretty", "html:target/cucumber-reports", "json:target/cucumber.json", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-        tags = "@wip",
+        tags = "@api and @dependsOnMethods",
         monochrome = true,
         publish = false)
 public class TestRunner extends AbstractTestNGCucumberTests {
@@ -24,7 +24,7 @@ public class TestRunner extends AbstractTestNGCucumberTests {
         super.setUpClass(context);
     }
     @Override
-    @DataProvider(parallel = true)
+    @DataProvider(parallel = false)
     public Object[][] scenarios() {
         return super.scenarios();
     }
