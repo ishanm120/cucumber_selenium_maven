@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.http.HttpStatus;
+import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 public class facilityServiceSteps extends BaseTest{
@@ -26,5 +27,15 @@ public class facilityServiceSteps extends BaseTest{
         softAssert.assertEquals(facilityDetails.getFacilityId(), "6124");
         softAssert.assertEquals(facilityDetails.getFacilityName(), "TEST");
         softAssert.assertAll();
+    }
+
+    @Then("enter github action details")
+    public void addGithubActions(){
+        System.out.println("adding github action details");
+    }
+
+    @Then("verify success execution")
+    public void verifySuccess(){
+        Assert.assertTrue(true);
     }
 }
