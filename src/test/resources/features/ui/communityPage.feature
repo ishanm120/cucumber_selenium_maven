@@ -1,4 +1,4 @@
-@community @ui @wip
+@community @ui
 Feature: community page
 
   Scenario: verify community page
