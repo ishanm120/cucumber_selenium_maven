@@ -24,3 +24,8 @@ jobs:
         cache: maven
     - name: Run test
       run: mvn clean test "-Dcucumber.filter.tags= @wip" --file pom.xml -DenableBrowserOptions=true
+    - name: upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: sparkReport
+        path: ./reports/*.html
