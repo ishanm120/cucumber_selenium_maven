@@ -85,7 +85,7 @@ public class DriverFactory {
     private WebDriver getChromeDriverInstance(){
         ChromeOptions options = new ChromeOptions();
         options.setBrowserVersion(ConfigReader.getConfigReader().getProperty("browserVersion"));
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver(options);
         return driver;
     }
 
