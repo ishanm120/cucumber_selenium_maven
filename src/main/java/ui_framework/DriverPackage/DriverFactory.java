@@ -85,7 +85,7 @@ public class DriverFactory {
     private WebDriver getChromeDriverInstance(){
         ChromeOptions options = new ChromeOptions();
         options.setBrowserVersion(ConfigReader.getConfigReader().getProperty("browserVersion"));
-        options.addArguments("--remote-debugging-pipe");
+        options.addArguments("--headless","--window-size=1920,1200");
         WebDriver driver = new ChromeDriver(options);
         return driver;
     }
