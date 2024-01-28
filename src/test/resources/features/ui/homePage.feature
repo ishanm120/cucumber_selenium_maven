@@ -13,6 +13,7 @@ Feature: Home page
     Given user opens home page
     Then sample step to fail
 
+    @smoke
   Scenario: verify home page fail test
     Given user opens home page
     Then sample step to fail

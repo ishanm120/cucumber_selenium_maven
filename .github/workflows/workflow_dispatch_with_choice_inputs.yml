@@ -10,7 +10,7 @@
 name: basic workflow_dispatch with choice inputs
 
 on:
-  workflow_dispatch:
+  repository_dispatch:
     inputs:
       environment:
         description: 'select environment to run'
@@ -23,6 +23,13 @@ on:
           - qa
           - dev
           - local
+      user_defined_body_flag:
+        type: boolean
+        description: 'select if want to run using your json'
+        default: false
+      user_defined_json:
+        type: string
+        description: "enter json"
 
 jobs:
   build:

@@ -1,5 +1,5 @@
-@api
-Feature: all login scenarios
+@api @wip
+Feature: api facility scenarios
 
   Scenario: verify successful response for facility details
     Given user hits GET facility details service for facility "6183"

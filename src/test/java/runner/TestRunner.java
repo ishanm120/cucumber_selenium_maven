@@ -11,7 +11,7 @@ import utils.ConfigReader;
 @CucumberOptions(features = "src/test/resources/features",
         glue = {"stepDefs"},
         plugin = {"pretty", "html:target/cucumber-reports", "json:target/cucumber.json", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-        tags = "@wip",
+//        tags = "@wip",
         monochrome = true,
         publish = false)
 public class TestRunner extends AbstractTestNGCucumberTests {
