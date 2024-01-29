@@ -10,7 +10,7 @@
 name: basic workflow_dispatch with choice inputs
 
 on:
-  repository_dispatch:
+  workflow_dispatch:
     inputs:
       environment:
         description: 'select environment to run'
