@@ -1,10 +1,12 @@
-@home @ui  @wip
+@home @ui
 Feature: Home page
 
+  @wip
   Scenario: verify home page
-    Given user opens home page
+    Given I open home page
     Then verify user is on homepage
 
+    @smoke
   Scenario: verify home page pass test
     Given user opens home page
     Then sample step to pass

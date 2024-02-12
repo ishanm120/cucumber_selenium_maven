@@ -11,7 +11,7 @@ public class NavigationSteps {
     private PageObjectManager pageObjectManager;
 
 
-    @When("user opens home page")
+    @When("(I)(user) open(s) home page")
     public void openHomePage(){
         pageObjectManager = new PageObjectManager();
         navigationPage = pageObjectManager.getNavigationPage();

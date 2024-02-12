@@ -146,6 +146,12 @@
           <suiteXmlFiles>
             <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
           </suiteXmlFiles>
+          <properties>
+            <property>
+              <name>listener</name>
+              <value>utils.Listeners.retry.AnnotationTransformer</value>
+            </property>
+          </properties>
         </configuration>
       </plugin>
         <plugin>

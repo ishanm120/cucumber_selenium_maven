@@ -5,4 +5,7 @@
             <class name="runner.TestRunner"/>
         </classes>
     </test>
+    <listeners>
+        <listener class-name="utils.Listeners.retry.AnnotationTransformer"></listener>
+    </listeners>
 </suite>
