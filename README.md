@@ -13,11 +13,21 @@ Maven 3.x
 
 # Usage
 Clone the repository:
-``` git clone[ https://github.com/naveenanimation20/Cucumber7.xTestNGLatestPOC.git](https://github.com/ishanm120/cucumber_selenium_maven.git) ```
+``` git clone (https://github.com/ishanm120/cucumber_selenium_maven.git) ```
 
 
-# Navigate to the project directory:
-``` cd Cucumber7.xTestNGLatestPOC ```
+# Features of Repository:
+``` UI automation ```
+
+``` API automation ```
+
+``` Retry during execution ```
+
+``` Extent Report ```
+
+``` Parallel execution  ```
+
+``` UI automation ```
 
 # Run the tests:
   option 1:  with Maven: You can use different tags to run:
