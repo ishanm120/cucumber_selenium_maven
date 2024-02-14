@@ -3,17 +3,17 @@ package api_framework.server;
 import io.restassured.response.Response;
 import utils.ConfigReader;
 
-public class EManifest implements Server{
+public class DummyJson implements Server{
 
-    private static EManifest emanifestInstance = null;
+    private static DummyJson dummyJson = null;
 
     private Response response;
 
-    public static EManifest getInstance(){
-        if(emanifestInstance==null){
-            emanifestInstance = new EManifest();
+    public static DummyJson getInstance(){
+        if(dummyJson==null){
+            dummyJson = new DummyJson();
         }
-        return emanifestInstance;
+        return dummyJson;
     }
     @Override
     public void getResponse(Response response) {
