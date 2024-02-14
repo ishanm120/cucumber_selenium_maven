@@ -6,14 +6,10 @@ This repository contains unning Cucumber tests using TestNG with Cucumber 7.x. T
 Java 8 or higher
 Maven 3.x
 
-# Project Structure
-
-
-
 
 # Usage
 Clone the repository:
-``` git clone (https://github.com/ishanm120/cucumber_selenium_maven.git) ```
+``` git clone https://github.com/ishanm120/cucumber_selenium_maven.git ```
 
 
 # Features of Repository:
@@ -27,7 +23,6 @@ Clone the repository:
 
 ``` Parallel execution  ```
 
-``` UI automation ```
 
 # Run the tests:
   option 1:  with Maven: You can use different tags to run:
