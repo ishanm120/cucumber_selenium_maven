@@ -1,6 +1,10 @@
 # Cucumber7.x Selenium 4.15 TestNG 7.7.1 UI and API
 
 This repository contains unning Cucumber tests using TestNG with Cucumber 7.x. The project demonstrates how to set up and configure your test framework to execute Cucumber scenarios for UI and API in parallel with TestNG.
+I have used following application for testing:
+UI: https://angular.io/guide/example-apps-list
+API: https://dummyjson.com
+``` You can add your own test cases using these menetioned urls ```
 
 # Prerequisites
 Java 8 or higher
