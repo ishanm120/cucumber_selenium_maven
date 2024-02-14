@@ -1,7 +1,5 @@
 package api_framework.api;
-
-import api_framework.serverSteps.GatewayVerificationServerSteps;
-
+import api_framework.serverSteps.ProductsServer;
 import static java.util.Objects.isNull;
 
 /**
@@ -9,9 +7,9 @@ import static java.util.Objects.isNull;
  */
 public class ServerStepsProvider {
 
-    private GatewayVerificationServerSteps gatewayVerificationServerSteps;
+    private ProductsServer productsServer;
 
-    public GatewayVerificationServerSteps getGatewayVerificationServerSteps(){
-        return isNull(gatewayVerificationServerSteps) ? gatewayVerificationServerSteps = new GatewayVerificationServerSteps() : gatewayVerificationServerSteps;
+    public ProductsServer getProductsServerSteps(){
+        return isNull(productsServer) ? productsServer = new ProductsServer() : productsServer;
     }
 }
