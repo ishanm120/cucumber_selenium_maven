@@ -5,6 +5,7 @@ This repository contains unning Cucumber tests using TestNG with Cucumber 7.x. T
 I have used following application for testing:
 UI: https://angular.io/guide/example-apps-list
 API: https://dummyjson.com
+
 ``` You can add your own test cases using these menetioned urls ```
 
 # Prerequisites
@@ -27,6 +28,8 @@ Clone the repository:
 ``` Extent Report ```
 
 ``` Parallel execution  ```
+
+``` Github workflows  ```
 
 
 # Run the tests:
