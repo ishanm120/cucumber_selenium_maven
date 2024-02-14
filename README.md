@@ -13,17 +13,17 @@ Maven 3.x
 
 # Usage
 Clone the repository:
-``` git clone https://github.com/naveenanimation20/Cucumber7.xTestNGLatestPOC.git ```
+``` git clone[ https://github.com/naveenanimation20/Cucumber7.xTestNGLatestPOC.git](https://github.com/ishanm120/cucumber_selenium_maven.git) ```
 
 
 # Navigate to the project directory:
 ``` cd Cucumber7.xTestNGLatestPOC ```
 
-# Run the tests 
-  option 1:  with Maven: You can use different tags to run 
+# Run the tests:
+  option 1:  with Maven: You can use different tags to run:
 ``` mvn test "-Dcucumber.filter.tags=@api and @wip" ```
 
- option 2: with testRunner Class: You can use different tags to run 
+ option 2: with testRunner Class: You can use different tags to run: 
 ``` Right click on testRunner class and run ```
 
  option 3: with textNG.xml Class:  
@@ -34,6 +34,7 @@ The tests will execute in parallel, and you can view the test results in the tar
 
 # Customization
 ``` To adjust the level of parallelism, edit global.properties and change the threadCount. ```
+
 ``` To adjust the number of retries, edit Retry.java class and update  maxTry. ```
 
 # Contributing
