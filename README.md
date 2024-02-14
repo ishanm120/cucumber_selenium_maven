@@ -33,8 +33,8 @@ Clone the repository:
 The tests will execute in parallel, and you can view the test results in the target/cucumber-reports directory.
 
 # Customization
-To adjust the level of parallelism, edit global.properties and change the threadCount. 
-To adjust the number of retries, edit Retry.java class and update  maxTry. 
+``` To adjust the level of parallelism, edit global.properties and change the threadCount. ```
+``` To adjust the number of retries, edit Retry.java class and update  maxTry. ```
 
 # Contributing
 Feel free to submit issues or pull requests if you find any bugs or have suggestions for improvements.
