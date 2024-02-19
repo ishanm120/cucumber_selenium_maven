@@ -1,13 +1,13 @@
 version: 2.1
+parameters:
+  cucumber-tags:
+    type: string
+    default: "@api"
 
 jobs:
   build:
     docker:
       - image: maven:3.8.4-jdk-11  # Use the desired Maven and JDK version
-parameters:
-  cucumber-tags:
-    type: string
-    default: "@api"
 
     working_directory: ~/app
 
