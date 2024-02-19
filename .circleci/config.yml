@@ -4,6 +4,10 @@ jobs:
   build:
     docker:
       - image: maven:3.8.4-jdk-11  # Use the desired Maven and JDK version
+parameters:
+  cucumber-tags:
+    type: string
+    default: "@api"
 
     working_directory: ~/app
 
@@ -23,5 +27,5 @@ jobs:
 
       - run:
           name: Run tests
-          command: mvn test "-Dcucumber.filter.tags=${cucumber_tags}"
+          command: mvn test "-Dcucumber.filter.tags=pipeline.parameters.cucumber-tags"
 
