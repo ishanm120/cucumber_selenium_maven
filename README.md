@@ -35,6 +35,7 @@ Clone the repository:
 # Run the tests:
   option 1:  with Maven: You can use different tags to run:
 ``` mvn test "-Dcucumber.filter.tags=@api and @wip" ```
+    configuration file is created in project (Go to Run configuration > run MAVEN_WIP file)
 
  option 2: with testRunner Class: You can use different tags to run: 
 ``` Right click on testRunner class and run ```
