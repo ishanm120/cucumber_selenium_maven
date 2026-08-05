@@ -36,9 +36,9 @@ public class productServiceSteps extends BaseTest{
         CreateProductRequest createProductRequest = new CreateProductRequest();
         createProductRequest.setTitle(rows.get("title"));
         createProductRequest.setDescription(rows.get("description"));
-        createProductRequest.setBrand(rows.get("price"));
-        createProductRequest.setCategory(rows.get("brand"));
-        createProductRequest.setPrice(rows.get("category"));
+        createProductRequest.setBrand(rows.get("brand"));
+        createProductRequest.setCategory(rows.get("category"));
+        createProductRequest.setPrice(rows.get("price"));
         response = serverStepsProvider.getProductsServerSteps().addNewProduct(createProductRequest,userHeader);
         return response;
     }

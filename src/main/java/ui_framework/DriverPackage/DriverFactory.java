@@ -60,7 +60,7 @@ public class DriverFactory {
             return;
         }
         getWebDriver().quit();
-        driverThreadLocal.set(null);
+        driverThreadLocal.remove();
     }
 
     public WebDriver getDriverInstance(){
