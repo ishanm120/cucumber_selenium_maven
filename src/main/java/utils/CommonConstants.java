@@ -6,5 +6,6 @@ public class CommonConstants {
 	public static int STATUS_CODE_201 = 201;
 	public static int STATUS_CODE_400 = 400;
 	public static int STATUS_CODE_404 = 404;
+	public static int STATUS_CODE_503 = 503;
 
 }
