@@ -17,31 +17,29 @@ public class Hooks {
         return logger.get();
     }
 
-    @Before
+    @Before("@ui")
     public void setup(Scenario scenario) {
-        if (scenario.getSourceTagNames().contains("@ui")) {
-            getLogger().info("starting webdriver instance");
-            DriverManager.getWebDriverManager().startWebDriver();
-        } else {
-            getLogger().info("API test started {}", scenario.getName());
-        }
+        getLogger().info("UI test started: {}", scenario.getName());
+        DriverManager.getWebDriverManager().startWebDriver();
     }
 
-    @After
+    @After("@ui")
     public void tearDown(Scenario scenario) {
-        afterStep(scenario);
-        if (scenario.getSourceTagNames().contains("@ui")) {
-            getLogger().info("stopping webdriver instance");
+        try {
+            attachScreenshotOnFailure(scenario);
+        } finally {
             DriverManager.getWebDriverManager().stopWebDriver(true);
+            logger.remove();
         }
     }
 
-    private void afterStep(Scenario scenario) {
+    private void attachScreenshotOnFailure(Scenario scenario) {
         if (scenario.isFailed()) {
             try {
                 byte[] src = ((TakesScreenshot) DriverManager.getWebDriverManager().getWebDriver()).getScreenshotAs(OutputType.BYTES);
-                scenario.attach(src, "image/png", null);
+                scenario.attach(src, "image/png", "Failure screenshot");
             } catch (Exception e) {
+                getLogger().warn("Unable to attach failure screenshot", e);
             }
         }
     }
