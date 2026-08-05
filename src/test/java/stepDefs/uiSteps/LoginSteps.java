@@ -11,19 +11,15 @@ import utils.PageObjectManager;
 
 public class LoginSteps {
 
-    private final PageObjectManager pageObjectManager;
-    private final LoginPage loginPage;
-    private final NavigationPage navigationPage;
+    private LoginPage loginPage;
+    private NavigationPage navigationPage;
     private String passwordBeforeToggle;
-
-    public LoginSteps() {
-        pageObjectManager = new PageObjectManager();
-        loginPage = pageObjectManager.getLoginPage();
-        navigationPage = pageObjectManager.getNavigationPage();
-    }
 
     @Given("the user opens the EazyGrade login page")
     public void openLoginPage() {
+        PageObjectManager pageObjectManager = new PageObjectManager();
+        loginPage = pageObjectManager.getLoginPage();
+        navigationPage = pageObjectManager.getNavigationPage();
         navigationPage.openLoginPage();
     }
 
