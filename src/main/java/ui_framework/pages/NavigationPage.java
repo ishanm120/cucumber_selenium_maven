@@ -1,14 +1,12 @@
 package ui_framework.pages;
 
-import base.BaseTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utilities.ConfigReader;
+import ui_framework.DriverPackage.DriverManager;
+import utils.ConfigReader;
 
 import java.time.Duration;
 
@@ -19,18 +17,17 @@ public class NavigationPage {
     private static final Logger logger = LogManager.getLogger(NavigationPage.class);
 
     public NavigationPage() {
-        driver = BaseTest.getDriver();
+        driver = DriverManager.getWebDriverManager().getWebDriver();
         wait = new WebDriverWait(driver,
-                Duration.ofSeconds(ConfigReader.getInstance().getGlobalTimeout()));
-        PageFactory.initElements(driver, this);
+                Duration.ofSeconds(ConfigReader.getConfigReader().getGlobalWait()));
     }
 
     public void openHomePage() {
-        openUrl(ConfigReader.getInstance().getApplicationUrl());
+        openUrl(ConfigReader.getConfigReader().getApplicationUrl());
     }
 
     public void openLoginPage() {
-        String baseUrl = ConfigReader.getInstance().getApplicationUrl();
+        String baseUrl = ConfigReader.getConfigReader().getApplicationUrl();
         openUrl(baseUrl.replaceAll("/+$", "") + "/login");
     }
 
