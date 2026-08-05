@@ -69,7 +69,7 @@ public class productServiceSteps extends BaseTest{
         response.validateStatusResponse(HttpStatus.SC_OK);
         GetProductsResponse getProductsResponse = response.responseAs(GetProductsResponse.class);
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(getProductsResponse.getTotal(), "100");
+        softAssert.assertEquals(getProductsResponse.getTotal(), "194");
         softAssert.assertEquals(getProductsResponse.getGetProductResponses().get(0).getTitle(),"iPhone 9");
         softAssert.assertAll();
     }

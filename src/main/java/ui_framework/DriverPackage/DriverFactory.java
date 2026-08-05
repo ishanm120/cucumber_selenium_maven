@@ -14,17 +14,15 @@ public class DriverFactory {
 
     private static final Logger logger = LogManager.getLogger(DriverFactory.class);
 
-    protected static
-    ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
-
+    protected static ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
 
     protected boolean isWebDriverStarted() {
-        return driverThreadLocal.get() != null;
+        return driverThreadLocal.get() == null;
     }
 
     public void startWebDriver() {
-        if (!isWebDriverStarted()) {
+        if (isWebDriverStarted()) {
             synchronized (Thread.currentThread()) {
                 logger.info("Create web driver instance!");
                 try {
@@ -47,7 +45,7 @@ public class DriverFactory {
     }
 
     public <T extends WebDriver> T getWebDriver(Class<T> clazz) throws Exception {
-        if (!isWebDriverStarted()) {
+        if (isWebDriverStarted()) {
             throw new Exception();
         }
         if (clazz.isInstance(driverThreadLocal.get())) {
@@ -58,7 +56,7 @@ public class DriverFactory {
     }
 
     public void stopWebDriver(boolean isClose) {
-        if (!isWebDriverStarted()) {
+        if (isWebDriverStarted()) {
             return;
         }
         getWebDriver().quit();
@@ -67,8 +65,7 @@ public class DriverFactory {
 
     public WebDriver getDriverInstance(){
         String browser = ConfigReader.getConfigReader().getProperty("browser");
-        logger.info("browser name is : ");
-        System.out.println("browser name is : "+ browser);
+        logger.info("browser name is : {}", browser);
         return getDriverInstance(browser);
     }
 
@@ -86,13 +83,11 @@ public class DriverFactory {
         ChromeOptions options = new ChromeOptions();
         options.setBrowserVersion(ConfigReader.getConfigReader().getProperty("browserVersion"));
         //options.addArguments("--headless","--window-size=1920,1200");
-        WebDriver driver = new ChromeDriver(options);
-        return driver;
+        return new ChromeDriver(options);
     }
 
     private WebDriver getFireFoxDriverInstance(){
-        WebDriver driver = new FirefoxDriver();
-        return driver;
+        return new FirefoxDriver();
     }
 
 

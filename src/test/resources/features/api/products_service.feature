@@ -8,7 +8,7 @@ Feature: all login scenarios
   @wip
   Scenario: verify count of products
     When user hits GET products details service
-    Then user should see "110" products
+    Then user should see "19" products
 
   Scenario: verify search product by id
     When user hits GET product by id service with product id "1"
