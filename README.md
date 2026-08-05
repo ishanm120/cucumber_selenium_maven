@@ -16,7 +16,9 @@ Current POC applications:
 
 # Usage
 Clone the repository:
-``` git clone https://github.com/ishanm120/cucumber_selenium_maven.git ```
+```shell
+git clone https://github.com/ishanm120/cucumber_selenium_maven.git
+```
 
 
 # Framework capabilities
@@ -33,15 +35,38 @@ Clone the repository:
 
 Run API work-in-progress tests:
 
-``` mvn test "-Dcucumber.filter.tags=@api and @wip" ```
+```shell
+mvn test "-Dcucumber.filter.tags=@api and @wip"
+```
 
 Run UI tests in headless mode:
 
-``` mvn test "-Dcucumber.filter.tags=@ui" -Dheadless=true ```
+```shell
+mvn test "-Dcucumber.filter.tags=@ui" -Dheadless=true
+```
+
+Run EZYGRD-1 tests that do not require valid credentials:
+
+```shell
+mvn test "-Dcucumber.filter.tags=@EZYGRD-1 and not @requiresCredentials" -Dheadless=true
+```
+
+Run all EZYGRD-1 tests by supplying credentials at runtime:
+
+```shell
+EZY_GRADE_USER_ID="<user-id>" EZY_GRADE_PASSWORD="<password>" \
+mvn test "-Dcucumber.filter.tags=@EZYGRD-1" -Dheadless=true
+```
+
+The equivalent Maven properties are `-DeazyGradeUserId=<user-id>` and
+`-DeazyGradePassword=<password>`. Environment variables or repository
+secrets are preferred because credentials must never be committed.
 
 Configuration can be overridden without changing committed files:
 
-``` mvn test -Dbrowser=firefox -DthreadCount=1 "-Dcucumber.filter.tags=@ui" ```
+```shell
+mvn test -Dbrowser=firefox -DthreadCount=1 "-Dcucumber.filter.tags=@ui"
+```
 
 Reports are generated under `reports/` and `target/cucumber-reports/`.
 
