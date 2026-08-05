@@ -17,13 +17,12 @@ public class DriverFactory {
     protected static ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 
 
-    protected boolean isWebDriverStarted() {
+    protected boolean isWebDriverStopped() {
         return driverThreadLocal.get() == null;
     }
 
     public void startWebDriver() {
-        if (isWebDriverStarted()) {
-            synchronized (Thread.currentThread()) {
+        if (isWebDriverStopped()) {
                 logger.info("Create web driver instance!");
                 try {
                     driverThreadLocal.set(getDriverInstance());
@@ -32,7 +31,6 @@ public class DriverFactory {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-            }
         }
     }
 
@@ -45,8 +43,8 @@ public class DriverFactory {
     }
 
     public <T extends WebDriver> T getWebDriver(Class<T> clazz) throws Exception {
-        if (isWebDriverStarted()) {
-            throw new Exception();
+        if (isWebDriverStopped()) {
+            throw new IllegalStateException("WebDriver has not been started for this thread");
         }
         if (clazz.isInstance(driverThreadLocal.get())) {
             return clazz.cast(driverThreadLocal.get());
@@ -56,11 +54,14 @@ public class DriverFactory {
     }
 
     public void stopWebDriver(boolean isClose) {
-        if (isWebDriverStarted()) {
+        if (isWebDriverStopped()) {
             return;
         }
-        getWebDriver().quit();
-        driverThreadLocal.set(null);
+        try {
+            getWebDriver().quit();
+        } finally {
+            driverThreadLocal.remove();
+        }
     }
 
     public WebDriver getDriverInstance(){
@@ -76,13 +77,18 @@ public class DriverFactory {
             case "firefox":
                 return getFireFoxDriverInstance();
         }
-        return null;
+        throw new IllegalArgumentException("Unsupported browser: " + browser);
     }
 
     private WebDriver getChromeDriverInstance(){
         ChromeOptions options = new ChromeOptions();
-        options.setBrowserVersion(ConfigReader.getConfigReader().getProperty("browserVersion"));
-        //options.addArguments("--headless","--window-size=1920,1200");
+        String browserVersion = ConfigReader.getConfigReader().getProperty("browserVersion");
+        if (browserVersion != null && !browserVersion.isBlank()) {
+            options.setBrowserVersion(browserVersion);
+        }
+        if (Boolean.parseBoolean(ConfigReader.getConfigReader().getProperty("headless"))) {
+            options.addArguments("--headless=new", "--window-size=1920,1200", "--no-sandbox", "--disable-dev-shm-usage");
+        }
         return new ChromeDriver(options);
     }
 

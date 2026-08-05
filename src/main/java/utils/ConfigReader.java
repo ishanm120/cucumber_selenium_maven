@@ -1,9 +1,7 @@
 package utils;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -11,8 +9,8 @@ public class ConfigReader {
 
     private static ConfigReader configReader;
 
-    private static Properties properties = new Properties();
-    private static final String propertyFilePath= "src/test/resources/configs/global.properties";
+    private final Properties properties = new Properties();
+    private static final String PROPERTY_FILE = "configs/global.properties";
 
 
     public static synchronized ConfigReader getConfigReader(){
@@ -29,43 +27,48 @@ public class ConfigReader {
 
 
     public void loadProperties(){
-       final Properties props = new Properties();
-
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader(propertyFilePath));
-            try {
-                props.load(reader);
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        try (InputStream input = ConfigReader.class.getClassLoader().getResourceAsStream(PROPERTY_FILE)) {
+            if (input == null) {
+                throw new IllegalStateException("Configuration file not found on classpath: " + PROPERTY_FILE);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Configuration.properties not found at " + propertyFilePath);
+            properties.load(input);
+        } catch (IOException exception) {
+            throw new IllegalStateException("Unable to load " + PROPERTY_FILE, exception);
         }
-        properties.putAll(props);
     }
 
     public String getProperty(final String propertyName){
+        String systemValue = System.getProperty(propertyName);
+        if (systemValue != null && !systemValue.isBlank()) {
+            return systemValue;
+        }
+        String environmentName = propertyName
+                .replaceAll("([a-z0-9])([A-Z])", "$1_$2")
+                .replace('.', '_')
+                .replace('-', '_')
+                .toUpperCase();
+        String environmentValue = System.getenv(environmentName);
+        if (environmentValue != null && !environmentValue.isBlank()) {
+            return environmentValue;
+        }
         return properties.getProperty(propertyName);
     }
 
     public long getGlobalWait() {
-        String implicitlyWait = properties.getProperty("globalTimeout");
+        String implicitlyWait = getProperty("globalTimeout");
         if(implicitlyWait != null) return Long.parseLong(implicitlyWait);
         else throw new RuntimeException("globalTimeout not specified in the Configuration.properties file.");
     }
 
     public String getApplicationUrl() {
-        String url = properties.getProperty("baseUrl");
+        String url = getProperty("baseUrl");
         if(url != null) return url;
         else throw new RuntimeException("url not specified in the Configuration.properties file.");
     }
 
     public String getBrowser() {
-        String url = properties.getProperty("browser");
-        if(url != null) return url;
+        String browser = getProperty("browser");
+        if(browser != null) return browser;
         else throw new RuntimeException("browser not specified in the Configuration.properties file.");
     }
 }

@@ -1,16 +1,17 @@
-# Cucumber7.x Selenium 4.15 TestNG 7.7.1 UI and API
+# Cucumber, Selenium, TestNG and RestAssured framework
 
-This repository contains unning Cucumber tests using TestNG with Cucumber 7.x. The project demonstrates how to set up and configure your test framework to execute Cucumber scenarios for UI and API in parallel with TestNG.
+This repository contains a BDD automation framework for UI, mobile-web and API testing. Cucumber scenarios run through TestNG and support parallel execution, Selenium WebDriver, RestAssured and Extent reporting.
 
-I have used following application for testing:
-UI: https://angular.io/guide/example-apps-list
-API: https://dummyjson.com
+Current POC applications:
 
-``` You can add your own test cases using these menetioned urls ```
+- UI: https://app.eazygrade.com
+- API sample: https://dummyjson.com
 
 # Prerequisites
-Java 8 or higher
-Maven 3.x
+
+- Java 21
+- Maven 3.9.x
+- Chrome or Firefox for UI execution
 
 
 # Usage
@@ -18,38 +19,49 @@ Clone the repository:
 ``` git clone https://github.com/ishanm120/cucumber_selenium_maven.git ```
 
 
-# Features of Repository:
-``` UI automation ```
+# Framework capabilities
 
-``` API automation ```
-
-``` Retry during execution ```
-
-``` Extent Report ```
-
-``` Parallel execution  ```
-
-``` Github workflows  ```
+- UI and mobile-web automation
+- API automation
+- Configurable retry, disabled by default
+- Extent reports and Cucumber reports
+- Parallel scenario execution
+- GitHub Actions validation
 
 
-# Run the tests:
-  option 1:  with Maven: You can use different tags to run:
+# Run tests
+
+Run API work-in-progress tests:
+
 ``` mvn test "-Dcucumber.filter.tags=@api and @wip" ```
-    configuration file is created in project (Go to Run configuration > run MAVEN_WIP file)
 
- option 2: with testRunner Class: You can use different tags to run: 
-``` Right click on testRunner class and run ```
+Run UI tests in headless mode:
 
- option 3: with textNG.xml Class:  
-``` Right click on textNG.xml class and run ```
+``` mvn test "-Dcucumber.filter.tags=@ui" -Dheadless=true ```
 
+Configuration can be overridden without changing committed files:
 
-The tests will execute in parallel, and you can view the test results in the target/cucumber-reports directory.
+``` mvn test -Dbrowser=firefox -DthreadCount=1 "-Dcucumber.filter.tags=@ui" ```
+
+Reports are generated under `reports/` and `target/cucumber-reports/`.
 
 # Customization
-``` To adjust the level of parallelism, edit global.properties and change the threadCount. ```
+Update `src/test/resources/configs/global.properties`, pass a Maven system property, or provide the equivalent uppercase environment variable.
 
-``` To adjust the number of retries, edit Retry.java class and update  maxTry. ```
+- `threadCount`: parallel scenario threads
+- `retryCount`: retry count; default is `0` so failures remain visible
+- `headless`: run UI tests without a visible browser
+- `browserVersion`: optional; blank lets Selenium Manager use the available version
+
+System properties and environment variables take precedence over the properties file. For example, `apiBaseUrl` can be supplied as `-DapiBaseUrl=...` or `API_BASE_URL`.
+
+# Contribution workflow
+
+1. Create a story branch such as `feature/EZYGRD-1`.
+2. Reuse existing feature files, step definitions, Page Objects and API services where appropriate.
+3. Do not commit credentials or environment secrets.
+4. Run the affected tests and attach the report to a draft pull request.
+5. Obtain the required approvals and passing checks before merging to `master`.
 
 # Contributing
 Feel free to submit issues or pull requests if you find any bugs or have suggestions for improvements.

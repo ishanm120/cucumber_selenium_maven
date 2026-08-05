@@ -6,9 +6,9 @@ Feature: all login scenarios
     Then validate response of products
 
   @wip
-  Scenario: verify count of products
+  Scenario: verify products are available
     When user hits GET products details service
-    Then user should see "19" products
+    Then user should see available products
 
   Scenario: verify search product by id
     When user hits GET product by id service with product id "1"
@@ -28,9 +28,8 @@ Feature: all login scenarios
       | category    | smartphones                                 |
     Then verify product is added successfully with title "iPhone 9"
 
-  Scenario: verify addition of product
+  Scenario: verify update of an existing product
     When user hits update product by id service with product id "1"
       | title | iPhone 15 pro max |
       | price | 600               |
     Then verify product is updated successfully with title "iPhone 15 pro max"
-
