@@ -1,28 +1,40 @@
 package ui_framework.pages;
 
-import ui_framework.DriverPackage.DriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ui_framework.DriverPackage.DriverManager;
 import utils.ConfigReader;
 
 import java.time.Duration;
 
 public class NavigationPage {
 
+    private final WebDriver driver;
+    private final WebDriverWait wait;
+    private static final Logger logger = LogManager.getLogger(NavigationPage.class);
+
     public NavigationPage() {
-        PageFactory.initElements(DriverManager.getWebDriverManager().getWebDriver(), this);
+        driver = DriverManager.getWebDriverManager().getWebDriver();
+        wait = new WebDriverWait(driver,
+                Duration.ofSeconds(ConfigReader.getConfigReader().getGlobalWait()));
     }
 
-    private static final Logger logger = LogManager.getLogger(HomePage.class);
-
-    public void openHomePage(){
-        logger.info("open application url");
-        DriverManager.getWebDriverManager().getWebDriver().get(ConfigReader.getConfigReader().getProperty("baseUrl"));
-        WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriverManager().getWebDriver(), Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.jsReturnsValue("return document.readyState == 'complete';"));
+    public void openHomePage() {
+        openUrl(ConfigReader.getConfigReader().getApplicationUrl());
     }
 
+    public void openLoginPage() {
+        String baseUrl = ConfigReader.getConfigReader().getApplicationUrl();
+        openUrl(baseUrl.replaceAll("/+$", "") + "/login");
+    }
+
+    private void openUrl(String url) {
+        logger.info("Opening URL: {}", url);
+        driver.get(url);
+        wait.until(ExpectedConditions.jsReturnsValue(
+                "return document.readyState === 'complete'"));
+    }
 }
