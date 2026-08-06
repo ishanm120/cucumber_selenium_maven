@@ -51,7 +51,7 @@ public class LoginSteps {
 
     @Then("a login error is displayed")
     public void verifyLoginError() {
-        Assert.assertFalse(loginPage.getAlertMessage().isBlank(),
+        Assert.assertTrue(loginPage.getAlertMessage().contains("Invalid credentials"),
                 "Expected an error alert for invalid credentials");
         Assert.assertTrue(loginPage.isLoginPageDisplayed(),
                 "User should remain on the login page after invalid login");
@@ -108,11 +108,21 @@ public class LoginSteps {
     }
 
     private String requiredConfig(String propertyName) {
-        String value = ConfigReader.getConfigReader().getProperty(propertyName);
+        String value =getProperty(propertyName);
         if (value == null || value.isBlank()) {
             throw new IllegalStateException(
                     "Missing required test configuration: " + propertyName);
         }
         return value;
+    }
+
+    public String getProperty(String propertyName) {
+        String systemValue = System.getProperty(propertyName);
+
+        if (systemValue != null && !systemValue.isBlank()) {
+            return systemValue.trim();
+        }
+
+        return ConfigReader.getConfigReader().getProperty(propertyName);
     }
 }

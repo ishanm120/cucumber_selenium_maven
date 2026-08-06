@@ -54,8 +54,7 @@ mvn test "-Dcucumber.filter.tags=@EZYGRD-1 and not @requiresCredentials" -Dheadl
 Run all EZYGRD-1 tests by supplying credentials at runtime:
 
 ```shell
-EZY_GRADE_USER_ID="<user-id>" EZY_GRADE_PASSWORD="<password>" \
-mvn test "-Dcucumber.filter.tags=@EZYGRD-1" -Dheadless=true
+mvn test "-Dcucumber.filter.tags=@EZYGRD-1" -DeazyGradeUserId=<userid> -DeazyGradePassword=<password>
 ```
 
 The equivalent Maven properties are `-DeazyGradeUserId=<user-id>` and

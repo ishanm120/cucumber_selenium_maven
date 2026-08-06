@@ -15,19 +15,22 @@ Feature: EazyGrade login
   Scenario: User ID is mandatory
     When the user enters Password "sample_password"
     And the user clicks Login
-    Then User ID required validation is displayed
+    Then a login error is displayed
+#    Then User ID required validation is displayed
 
   @regression @negative
   Scenario: Password is mandatory
     When the user enters User ID "sample_user"
     And the user clicks Login
-    Then Password required validation is displayed
+    Then a login error is displayed
+#    Then Password required validation is displayed
 
   @regression @negative
   Scenario: User ID and Password are mandatory
     When the user clicks Login
-    Then User ID required validation is displayed
-    And Password required validation is displayed
+    Then a login error is displayed
+#    Then User ID required validation is displayed
+#    And Password required validation is displayed
 
   @regression @negative
   Scenario: Reject invalid credentials

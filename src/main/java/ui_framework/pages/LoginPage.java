@@ -1,9 +1,6 @@
 package ui_framework.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ui_framework.DriverPackage.DriverManager;
@@ -21,6 +18,8 @@ public class LoginPage {
             "button[aria-label='Show password'], button[aria-label='Hide password']");
     private static final By ALERT = By.cssSelector(
             "[role='alert'], .chakra-alert, .chakra-toast");
+    private static final By INVALID_CREDENTIALS_MESSAGE =
+            By.xpath("//*[@role='alert']/div[last()]");
 
     private final WebDriver driver;
     private final WebDriverWait wait;
@@ -97,14 +96,19 @@ public class LoginPage {
 
     public String getAlertMessage() {
         try {
-            List<WebElement> alerts = wait.until(
-                    ExpectedConditions.presenceOfAllElementsLocatedBy(ALERT));
-            return alerts.stream()
-                    .map(WebElement::getText)
-                    .filter(text -> text != null && !text.isBlank())
-                    .findFirst()
-                    .orElse("");
-        } catch (RuntimeException ignored) {
+            return wait.until(driver -> {
+                List<WebElement> messages =
+                        driver.findElements(INVALID_CREDENTIALS_MESSAGE);
+
+                return messages.stream()
+                        .filter(WebElement::isDisplayed)
+                        .map(WebElement::getText)
+                        .map(String::trim)
+                        .filter(text -> !text.isEmpty())
+                        .findFirst()
+                        .orElse(null);
+            });
+        } catch (TimeoutException e) {
             return "";
         }
     }
